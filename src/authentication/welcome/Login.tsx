@@ -76,7 +76,7 @@ const Login = ({ navigation }: any) => {
           marginBottom={4}
         >
           <CheckBox
-            label="Remember me"
+            label="Recuerdame"
             checked={values.rememberMe}
             onChange={() => setFieldValue("rememberMe", !values.rememberMe)}
           />
