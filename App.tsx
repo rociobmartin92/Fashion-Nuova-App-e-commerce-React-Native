@@ -5,6 +5,7 @@ import Welcome from "./src/authentication/welcome/Welcome";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { theme } from "./src/theme/theme";
+import RootNavigation from "./src/stack";
 
 let customFonts = {
   gloock: require("./assets/fonts/Gloock-Regular.ttf"),
@@ -25,7 +26,7 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <Welcome />
+      <RootNavigation />
     </NativeBaseProvider>
   );
 }

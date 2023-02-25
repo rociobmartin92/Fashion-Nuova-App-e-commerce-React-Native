@@ -1,18 +1,23 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { Box, Button } from "native-base";
 
 interface IButtonSmallProps {
   buttonLabel: string;
   textColor: string;
-
+  navigation: any;
+  stackNavigation: string;
 }
 
 const ButtomSmallComponent = ({
   buttonLabel,
   textColor,
-
+  navigation,
+  stackNavigation,
 }: IButtonSmallProps) => {
+  const handleButtom = () => {
+    navigation.navigate(stackNavigation);
+  };
+
   return (
     <Box>
       <Button
@@ -24,7 +29,7 @@ const ButtomSmallComponent = ({
           fontFamily: "gloock",
           fontSize: 13,
         }}
-        // onPress={() => handleButtom()}
+        onPress={() => handleButtom()}
         _pressed={{ bg: "transparent" }}
       >
         {buttonLabel}
