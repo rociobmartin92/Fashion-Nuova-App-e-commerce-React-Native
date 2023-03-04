@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-fashionnouva-staging-181754-authRole",
+      "UnauthRoleArn": "arn:aws:iam::344837031447:role/amplify-fashionnouva-staging-181754-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::344837031447:role/amplify-fashionnouva-staging-181754-authRole",
+      "Region": "sa-east-1",
+      "DeploymentBucketName": "amplify-fashionnouva-staging-181754-deployment",
+      "UnauthRoleName": "amplify-fashionnouva-staging-181754-unauthRole",
+      "StackName": "amplify-fashionnouva-staging-181754",
+      "StackId": "arn:aws:cloudformation:sa-east-1:344837031447:stack/amplify-fashionnouva-staging-181754/e2691640-bab8-11ed-be25-02e8bc1e41bc",
+      "AmplifyAppId": "d3m8jsbjjq35wh"
+    },
+    "categories": {
+      "auth": {
+        "FashionNouva": {}
+      }
+    }
+  }
+}

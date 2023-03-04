@@ -8,17 +8,20 @@ interface IButtonComponentProps {
   // stackTitle?: string;
   // navigation?: any;
   // handleButtom: () => unknown;
+  onPress: () => void;
 }
 
 const ButtonComponent = ({
   buttonLabel,
   textColor,
   bg,
+  ...props
 }: // handleButtom,
 IButtonComponentProps) => {
   return (
     <Box>
       <Button
+        {...props}
         fontSize={16}
         mx={8}
         bg={bg}

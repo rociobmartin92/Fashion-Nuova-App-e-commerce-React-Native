@@ -14,10 +14,10 @@ import { SafeAreaView } from "react-native";
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+    .min(2, "Muy corto!")
+    .max(50, "Muy largo!")
+    .required("Complete este campo"),
+  email: Yup.string().email("Email inválido").required("Complete este campo"),
 });
 
 const Login = ({ navigation }: any) => {
@@ -32,7 +32,7 @@ const Login = ({ navigation }: any) => {
   } = useFormik({
     initialValues: { email: "", password: "", rememberMe: false },
     validationSchema: LoginSchema,
-    onSubmit: (e) => navigation.navigate("home"),
+    onSubmit: (e) => console.log(e),
   });
 
   const footer = (
@@ -54,9 +54,13 @@ const Login = ({ navigation }: any) => {
             placeholder="Ingresa tu email"
             onBlur={handleBlur("email")}
             onChangeText={handleChange("email")}
-            error={errors?.email}
             touched={touched?.email}
           />
+          {errors?.email && (
+            <Text fontFamily="gloock" ml={8} color="red.400">
+              {errors?.email}
+            </Text>
+          )}
         </Box>
         <Box marginBottom={4}>
           <TextInput
@@ -64,10 +68,14 @@ const Login = ({ navigation }: any) => {
             placeholder="Ingresa tu contarseña"
             onBlur={handleBlur("password")}
             onChangeText={handleChange("password")}
-            error={errors?.password}
             touched={touched?.password}
             secureTextEntry
           />
+          {errors?.password && (
+            <Text fontFamily="gloock" ml={8} color="red.400">
+              {errors?.password}
+            </Text>
+          )}
         </Box>
         <Box
           flexDirection="row"
@@ -94,6 +102,7 @@ const Login = ({ navigation }: any) => {
           bg="fashion.pink"
           buttonLabel="Ingresar a mi cuenta"
           textColor="white"
+          onPress={() => handleSubmit()}
         />
       </Box>
     </SafeAreaView>
