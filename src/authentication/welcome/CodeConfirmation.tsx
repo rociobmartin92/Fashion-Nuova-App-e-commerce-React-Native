@@ -58,7 +58,7 @@ const CodeConfirmation = ({ navigation, route }: any) => {
       <Titles title="Registro" />
       <Box>
         <Box>
-          <Text ml={5} mb={1} fontFamily="gloock">
+          <Text ml={5} my={2.5} fontSize={15} fontFamily="gloock">
             Ingresa el código enviado a tu email {username.username}
           </Text>
           <TextInput
