@@ -5,6 +5,9 @@ import Welcome from "../authentication/welcome/Welcome";
 import Login from "../authentication/welcome/Login";
 import { Button, ChevronLeftIcon, Image, Text } from "native-base";
 import { TouchableWithoutFeedback } from "react-native";
+import ForgotPassword from "../authentication/welcome/ForgotPassword";
+import Register from "../authentication/welcome/Register";
+import CodeConfirmation from "../authentication/welcome/CodeConfirmation";
 
 const Stack = createNativeStackNavigator();
 
@@ -90,6 +93,78 @@ const RootNavigation = () => {
             ),
           })}
           component={Login}
+        />
+        <Stack.Screen
+          name="forgotPassword"
+          options={({ navigation, route }) => ({
+            // headerRight: () => <Button />,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                bg="transparent"
+                m={0}
+                p={0}
+                onPress={() => navigation.goBack()}
+              >
+                <ChevronLeftIcon size={5} color="black" />
+              </Button>
+            ),
+            headerBackground: () => (
+              <Image
+                alt="sdkfjlsd"
+                source={require("../../assets/images/patterns/02.png")}
+              />
+            ),
+          })}
+          component={ForgotPassword}
+        />
+        <Stack.Screen
+          name="register"
+          options={({ navigation, route }) => ({
+            // headerRight: () => <Button />,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                bg="transparent"
+                m={0}
+                p={0}
+                onPress={() => navigation.goBack()}
+              >
+                <ChevronLeftIcon size={5} color="black" />
+              </Button>
+            ),
+            headerBackground: () => (
+              <Image
+                alt="sdkfjlsd"
+                source={require("../../assets/images/patterns/02.png")}
+              />
+            ),
+          })}
+          component={Register}
+        />
+        <Stack.Screen
+          name="codeConfirmation"
+          options={({ navigation, route }) => ({
+            // headerRight: () => <Button />,
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                bg="transparent"
+                m={0}
+                p={0}
+                onPress={() => navigation.goBack()}
+              >
+                <ChevronLeftIcon size={5} color="black" />
+              </Button>
+            ),
+            headerBackground: () => (
+              <Image
+                alt="sdkfjlsd"
+                source={require("../../assets/images/patterns/02.png")}
+              />
+            ),
+          })}
+          component={CodeConfirmation}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -30,7 +30,7 @@ const Welcome = ({ navigation }: any) => {
           buttonLabel="Registrarme"
           textColor="black"
           bg="fashion.pink"
-          // handleButtom="registerForm"
+          onPress={() => navigation.navigate("register")}
         />
         <ButtomSmallComponent
           stackNavigation="login"
