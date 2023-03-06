@@ -1,20 +1,18 @@
 import { StatusBar } from "expo-status-bar";
-import { Box, Button, NativeBaseProvider, Text } from "native-base";
+import { Button, NativeBaseProvider, Text } from "native-base";
 import { useEffect, useState } from "react";
-import Welcome from "./src/authentication/welcome/Welcome";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { theme } from "./src/theme/theme";
 import RootNavigation from "./src/stack";
+import { Amplify } from "aws-amplify";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
+import awsExports from "./src/aws-exports";
 
 let customFonts = {
   gloock: require("./assets/fonts/Gloock-Regular.ttf"),
 };
 
-import { Amplify } from "aws-amplify";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
-
-import awsExports from "./src/aws-exports";
 Amplify.configure(awsExports);
 
 export default function App() {
@@ -39,7 +37,7 @@ export default function App() {
     <NativeBaseProvider theme={theme}>
       <Authenticator.Provider>
         {/* <Authenticator> */}
-          <RootNavigation />
+        <RootNavigation />
         {/* </Authenticator> */}
       </Authenticator.Provider>
     </NativeBaseProvider>

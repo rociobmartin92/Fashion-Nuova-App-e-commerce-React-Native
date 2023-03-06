@@ -1,4 +1,4 @@
-import { SafeAreaView } from "react-native";
+import { Alert, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import { Box, Button, Input, Text } from "native-base";
 import Titles from "../../components/Titles";
@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import TextInput from "../../components/TextInput";
 import ButtonComponent from "../../components/ButtonComponent";
 import { Auth } from "aws-amplify";
+import AlertComponent from "../../components/AlertComponent";
 
 const SignUpSchema = Yup.object().shape({
   name: Yup.string()
@@ -14,8 +15,8 @@ const SignUpSchema = Yup.object().shape({
     .max(50, "Muy largo!")
     .required("Requerido"),
   password: Yup.string()
-    .min(2, "Muy corto!")
-    .max(50, "Muy largo!")
+    .min(6, "Muy corto!")
+    .max(15, "Muy largo!")
     .required("Requerido"),
   email: Yup.string().email("Email inválido").required("Requerido"),
 });
@@ -45,9 +46,10 @@ const Register = ({ navigation }: any) => {
         },
       });
       navigation.navigate("codeConfirmation", { username });
-      console.log(user);
+      console.log("USER", user);
     } catch (error) {
       console.log("error signing up:", error);
+      Alert.alert("Error", "Ha ocurrido un error: " + error);
     }
   }
 
@@ -55,50 +57,57 @@ const Register = ({ navigation }: any) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Titles title="Registro" />
       <Box>
-        <Box>
-          <Box marginBottom={4}>
-            <TextInput
-              icon="user"
-              placeholder="Enter your Name"
-              onBlur={handleBlur("name")}
-              onChangeText={handleChange("name")}
-              touched={touched?.name}
-            />
-            {errors?.name && (
-              <Text fontFamily="gloock" ml={8} color="red.400">
-                {errors?.name}
-              </Text>
-            )}
-          </Box>
-          <Box marginBottom={4}>
-            <TextInput
-              icon="mail"
-              placeholder="Enter your Email"
-              onBlur={handleBlur("email")}
-              onChangeText={handleChange("email")}
-              touched={touched?.email}
-            />
-          </Box>
+        <Box marginBottom={4}>
+          <Text ml={5} mb={1} fontFamily="gloock">
+            Ingresa un nombre de usuario
+          </Text>
+          <TextInput
+            icon="user"
+            placeholder="Usuario"
+            onBlur={handleBlur("name")}
+            onChangeText={handleChange("name")}
+            touched={touched?.name}
+          />
+          {errors?.name && (
+            <Text fontFamily="gloock" ml={8} color="red.400">
+              {errors?.name}
+            </Text>
+          )}
+        </Box>
+        <Box marginBottom={4}>
+          <Text ml={5} mb={1} fontFamily="gloock">
+            Ingresa tu email
+          </Text>
+          <TextInput
+            icon="mail"
+            placeholder="Email"
+            onBlur={handleBlur("email")}
+            onChangeText={handleChange("email")}
+            touched={touched?.email}
+          />
           {errors?.email && (
             <Text fontFamily="gloock" ml={8} color="red.400">
               {errors?.email}
             </Text>
           )}
-          <Box marginBottom={4}>
-            <TextInput
-              icon="lock"
-              placeholder="Enter your Password"
-              onBlur={handleBlur("password")}
-              onChangeText={handleChange("password")}
-              touched={touched?.password}
-              secureTextEntry
-            />
-            {errors?.password && (
-              <Text fontFamily="gloock" ml={8} color="red.400">
-                {errors?.password}
-              </Text>
-            )}
-          </Box>
+        </Box>
+        <Box marginBottom={4}>
+          <Text ml={5} mb={1} fontFamily="gloock">
+            Ingresa una contraseña mayor a 6 carácteres
+          </Text>
+          <TextInput
+            icon="lock"
+            placeholder="Contraseña"
+            onBlur={handleBlur("password")}
+            onChangeText={handleChange("password")}
+            touched={touched?.password}
+            secureTextEntry
+          />
+          {errors?.password && (
+            <Text fontFamily="gloock" ml={8} color="red.400">
+              {errors?.password}
+            </Text>
+          )}
         </Box>
       </Box>
       <Box position="absolute" bottom={0} width="100%" pb={10}>

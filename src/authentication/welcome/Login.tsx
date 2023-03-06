@@ -50,11 +50,6 @@ const Login = ({ navigation }: any) => {
       // showAlert("success", "Login exitoso!", "");
     } catch (error) {
       console.log("ERROR signing in", error);
-      const showAlert = (status: string, title: string, subTitle: string) => {
-        return (
-          <AlertComponent status={status} title={title} subtitle={subTitle} />
-        );
-      };
     }
     console.log(info);
     console.log(typeof info);

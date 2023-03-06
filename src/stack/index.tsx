@@ -121,7 +121,6 @@ const RootNavigation = () => {
         <Stack.Screen
           name="register"
           options={({ navigation, route }) => ({
-            // headerRight: () => <Button />,
             headerTitle: "",
             headerLeft: () => (
               <Button
@@ -145,7 +144,6 @@ const RootNavigation = () => {
         <Stack.Screen
           name="codeConfirmation"
           options={({ navigation, route }) => ({
-            // headerRight: () => <Button />,
             headerTitle: "",
             headerLeft: () => (
               <Button

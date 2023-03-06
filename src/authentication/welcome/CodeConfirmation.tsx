@@ -1,70 +1,81 @@
-import { SafeAreaView } from "react-native";
-import React from "react";
+import { Alert, SafeAreaView } from "react-native";
+import React, { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { Box, Button, Text } from "native-base";
 import ButtonComponent from "../../components/ButtonComponent";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import TextInput from "../../components/TextInput";
+import Titles from "../../components/Titles";
 
 const CodeSchema = Yup.object().shape({
-  code: Yup.string()
-    .min(5, "Muy corto!")
-    .max(7, "Muy largo!")
-    .required("Requerido"),
+  code: Yup.string().required("Requerido"),
 });
 
 const CodeConfirmation = ({ navigation, route }: any) => {
-  const username = route.params();
-
   const { handleChange, handleBlur, handleSubmit, errors, touched } = useFormik(
     {
       initialValues: { code: "" },
       validationSchema: CodeSchema,
-      onSubmit: (e) => confirmSignUp(e.code, username),
+      onSubmit: (e) => confirmSignUp(e.code),
     }
   );
 
-  async function confirmSignUp(username: string, code: string) {
+  const username = route.params;
+
+  const [mostrarTexto, setMostrarTexto] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setMostrarTexto(true);
+    }, 10000);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  async function confirmSignUp(code: string) {
     try {
-      await Auth.confirmSignUp(username, code);
+      await Auth.confirmSignUp(username.username, code);
+      Alert.alert("Gracias!", "Su cuenta fue activada con exito");
+      navigation.navigate("login");
     } catch (error) {
       console.log("error confirming sign up", error);
+      Alert.alert("Error", "Ha ocurrido un error: " + error);
     }
   }
 
-  async function resendConfirmationCode(username: string) {
+  async function resendConfirmationCode() {
     try {
-      await Auth.resendSignUp(username);
+      await Auth.resendSignUp(username.username);
       console.log("code resent successfully");
     } catch (err) {
       console.log("error resending code: ", err);
+      Alert.alert("Error", "Ha ocurrido un error: " + err);
     }
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Titles title="Registro" />
       <Box>
-        <Box marginTop={4} alignItems="center">
-          <Text mb={1} fontFamily="gloock">
-            Ingrese el código enviado a su email
+        <Box>
+          <Text ml={5} mb={1} fontFamily="gloock">
+            Ingresa el código enviado a tu email {username.username}
           </Text>
-          <Box marginBottom={4}>
-            <TextInput
-              icon="code"
-              placeholder="Ingresa el código aquí"
-              onBlur={handleBlur("code")}
-              onChangeText={handleChange("code")}
-              touched={touched?.code}
-            />
-          </Box>
+          <TextInput
+            icon="terminal"
+            placeholder="Código"
+            onBlur={handleBlur("code")}
+            onChangeText={handleChange("code")}
+            touched={touched?.code}
+          />
           {errors?.code && (
             <Text fontFamily="gloock" ml={8} color="red.400">
               {errors?.code}
             </Text>
           )}
         </Box>
-        {setTimeout(function () {
+
+        {mostrarTexto && (
           <Button
             fontSize={16}
             mx={8}
@@ -74,12 +85,12 @@ const CodeConfirmation = ({ navigation, route }: any) => {
               fontFamily: "gloock",
               fontSize: 13,
             }}
-            onPress={() => resendConfirmationCode(username)}
+            onPress={() => resendConfirmationCode()}
             _pressed={{ bg: "transparent" }}
           >
             Reenviar código
-          </Button>;
-        }, 5000)}
+          </Button>
+        )}
       </Box>
       <Box position="absolute" bottom={0} width="100%" pb={10}>
         <ButtonComponent
