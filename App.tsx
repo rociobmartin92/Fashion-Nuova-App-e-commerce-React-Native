@@ -8,6 +8,8 @@ import RootNavigation from "./src/stack";
 import { Amplify } from "aws-amplify";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
 import awsExports from "./src/aws-exports";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
 
 let customFonts = {
   gloock: require("./assets/fonts/Gloock-Regular.ttf"),
@@ -34,12 +36,14 @@ export default function App() {
   }
 
   return (
-    <NativeBaseProvider theme={theme}>
-      <Authenticator.Provider>
-        {/* <Authenticator> */}
-        <RootNavigation />
-        {/* </Authenticator> */}
-      </Authenticator.Provider>
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <NativeBaseProvider theme={theme}>
+        <Authenticator.Provider>
+          {/* <Authenticator> */}
+          <RootNavigation />
+          {/* </Authenticator> */}
+        </Authenticator.Provider>
+      </NativeBaseProvider>
+    </Provider>
   );
 }

@@ -12,9 +12,10 @@ const Welcome = ({ navigation }: any) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       {/* <Titles title="Bienvenidos!" /> */}
       <Image
+        mt={20}
         alignSelf="center"
-        width={330}
-        height={580}
+        width={310}
+        height={520}
         alt="welcome"
         source={welcomeImage}
       />

@@ -21,13 +21,12 @@ const ButtomSmallComponent = ({
   return (
     <Box>
       <Button
-        fontSize={16}
         mx={8}
         bg="transparent"
         _text={{
           color: textColor,
           fontFamily: "gloock",
-          fontSize: 13,
+          fontSize: 15,
         }}
         onPress={() => handleButtom()}
         _pressed={{ bg: "transparent" }}

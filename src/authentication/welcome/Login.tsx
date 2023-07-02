@@ -9,9 +9,9 @@ import { Box, Text } from "native-base";
 import Footer from "../../components/Footer";
 import Titles from "../../components/Titles";
 import SubTitles from "../../components/SubTitles";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import { Auth } from "aws-amplify";
-import AlertComponent from "../../components/AlertComponent";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ButtomSmallComponent from "../../components/ButtomSmallComponent";
 
 const LoginSchema = Yup.object().shape({
@@ -47,6 +47,7 @@ const Login = ({ navigation }: any) => {
     try {
       const user = await Auth.signIn(info.email, info.password);
       console.log("SU LOGIN FUE EXITOSO");
+      navigation.navigate("home");
       // showAlert("success", "Login exitoso!", "");
     } catch (error) {
       console.log("ERROR signing in", error);
@@ -63,20 +64,13 @@ const Login = ({ navigation }: any) => {
     }
   }
 
-  const footer = (
-    <Footer
-      title="Don't have an account?"
-      action="Signup here"
-      onPress={() => navigation.navigate("signup")}
-    />
-  );
-
   return (
     // <Container pattern={0} footer={footer}>
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <Box>
         <Titles title="Bienvenido de nuevo!" />
         <SubTitles subTitle="Ingresa a tu cuenta" />
+        {/* <KeyboardAwareScrollView> */}
         <Box marginBottom={4}>
           <TextInput
             icon="mail"
@@ -106,6 +100,7 @@ const Login = ({ navigation }: any) => {
             </Text>
           )}
         </Box>
+
         <Box
           flexDirection="row"
           justifyContent="space-between"
@@ -118,9 +113,11 @@ const Login = ({ navigation }: any) => {
             onChange={() => setFieldValue("rememberMe", !values.rememberMe)}
           />
         </Box>
+        {/* </KeyboardAwareScrollView> */}
       </Box>
       {/* </Container> */}
-      <Box position="absolute" bottom={0} width="100%" pb={10}>
+
+      <Box mt={40} width="100%">
         <ButtomSmallComponent
           buttonLabel="Olvide mi contraseña"
           textColor="fashion.black"

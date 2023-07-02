@@ -22,7 +22,7 @@ IButtonComponentProps) => {
     <Box>
       <Button
         {...props}
-        fontSize={16}
+        fontSize={17}
         mx={8}
         bg={bg}
         _text={{

@@ -8,6 +8,7 @@ import { TouchableWithoutFeedback } from "react-native";
 import ForgotPassword from "../authentication/welcome/ForgotPassword";
 import Register from "../authentication/welcome/Register";
 import CodeConfirmation from "../authentication/welcome/CodeConfirmation";
+import Home from "../views/Home";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,7 +45,7 @@ const RootNavigation = () => {
     //   routeNameRef.current = currentRouteName;
     // }}
     >
-      <Stack.Navigator initialRouteName="welcome" screenOptions={{}}>
+      <Stack.Navigator initialRouteName="home" screenOptions={{}}>
         {/* <Stack.Group
           screenOptions={({ navigation, route }) => ({
             headerRight: () => (
@@ -63,10 +64,29 @@ const RootNavigation = () => {
         </Stack.Group> */}
 
         <Stack.Screen
+          name="home"
+          options={({ navigation, route }) => ({
+            headerTitle: "",
+            headerLeft: () => (
+              <Button
+                bg="transparent"
+                m={0}
+                p={0}
+                onPress={() => navigation.goBack()}
+              >
+                <ChevronLeftIcon size={5} color="black" />
+              </Button>
+            ),
+          })}
+          component={Home}
+        />
+
+        <Stack.Screen
           name="welcome"
           options={({ navigation, route }) => ({
             // headerRight: () => <Button />,
             headerTitle: "",
+            headerShown: false,
           })}
           component={Welcome}
         />
